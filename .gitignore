@@ -1,2 +1,4 @@
-
+*.DS_Store
 *.mat
+octave-core
+octave-workspace
