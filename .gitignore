@@ -1,4 +1,7 @@
 *.DS_Store
-*.mat
+*/ml_login_data.mat
+ml_login_data.mat
 octave-core
 octave-workspace
+*/octave-core
+*/octate-workspace
