@@ -62,23 +62,39 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+a_one = [ones(size(X, 1), 1) X];
+z_two = a_one * Theta1';
+a_two = [ones(size(z_two, 1), 1) sigmoid(z_two)];
+z_three = a_two * Theta2';
+a_three = sigmoid(z_three);
+cost = 0;
+regularizableTheta1 = Theta1(:,2:end);
+regularizableTheta2 = Theta2(:,2:end);
 
+for i = 1:m
+	correctValue = zeros(num_labels, 1);
+	correctValue(y(i)) = 1;
+	for j = 1:num_labels
+		h = a_three(i,j);
+		cost = cost + (-correctValue(j) * log(h)) - (1 - correctValue(j)) * log(1 - h);
+	end
+end
+regularization = (lambda/(2*m)) * (sum((regularizableTheta1 .^ 2)(:)) + sum((regularizableTheta2 .^ 2)(:)));
+J = ((1/m) * cost) + regularization;
 
+y_matrix = eye(num_labels)(y,:);
+d3 = a_three - y_matrix;
+d2 = (d3 * regularizableTheta2) .* sigmoidGradient(z_two);
 
+D2 = d3' * a_two;
+D1 = d2' * a_one;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+regularizationTheta2 = (lambda/m) * Theta2;
+regularizationTheta1 = (lambda/m) * Theta1;
+regularizationTheta2(:,1) = 0; % j = 0 does not regularize (bias)
+regularizationTheta1(:,1) = 0; % j = 0 does not regularize (bias)
+Theta2_grad = (1/m) * D2 + regularizationTheta2;
+Theta1_grad = (1/m) * D1 + regularizationTheta1;
 
 % -------------------------------------------------------------
 
