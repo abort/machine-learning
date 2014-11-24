@@ -97,7 +97,10 @@ while ~isempty(email_contents)
     %       str2). It will return 1 only if the two strings are equivalent.
     %
 
-
+    found_index = lookup(getVocabList(), str, 'm');
+    if (found_index > 0)
+        word_indices = [word_indices ; found_index];
+    end
 
 
 
