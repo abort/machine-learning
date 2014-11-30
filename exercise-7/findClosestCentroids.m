@@ -21,10 +21,16 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+for i = 1:size(X)
+	distance = zeros(size(centroids, 1), 1);
+	for j = 1:size(centroids)
+		distance(j) = sum(sum((X(i, :) - centroids(j, :)) .^ 2)); 
+	end
+	[value, idx(i)] = min(distance);
+end
 
-
-
-
+% way faster but kind of a cheat ;)
+assert(idx == dsearchn(centroids, X));
 
 
 % =============================================================

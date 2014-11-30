@@ -26,10 +26,10 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
-
-
+for k = 1:size(centroids)
+	assignedDataPoints = find(idx == k);
+	centroids(k, :) = sum(X(assignedDataPoints, :)) ./ length(assignedDataPoints); % mean would also work here
+end
 
 
 
