@@ -19,6 +19,9 @@ Z = zeros(size(X, 1), K);
 %
 
 
+U_reduced = U(:, 1:K); % retrieve the first 1 to K columns
+Z = (U_reduced' * X')';
+
 
 
 % =============================================================

@@ -30,7 +30,7 @@ for i = 1:size(X)
 end
 
 % way faster but kind of a cheat ;)
-assert(idx == dsearchn(centroids, X));
+% idx = dsearchn(centroids, X));
 
 
 % =============================================================
